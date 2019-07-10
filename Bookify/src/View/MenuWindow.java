@@ -7,29 +7,27 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Model.BooksCopyService;
 import Model.Person;
 import Model.sqliteConnection;
 import net.proteanit.sql.DbUtils;
 
-import javax.swing.JLabel;
-import javax.swing.JButton;
 import java.awt.Panel;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class MenuWindow extends JFrame {
+	//img
+	Image img_Plus = new ImageIcon(this.getClass().getResource("/Actions-list-add-icon.png")).getImage();
+	Image img_Minus = new ImageIcon(this.getClass().getResource("/Actions-list-remove-icon.png")).getImage();
 	private JTextField BookIDField;
 	private JTextField AuthorField;
 	private JTextField YearofproducionField;
@@ -42,9 +40,18 @@ public class MenuWindow extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	private static JTable table;
-	private static JTable bookCopyTable;
 	private JComboBox Search_comboBox;
-	static void outputBooksToScreen()
+	///////////////////pane2
+	private JTextField BookCopyIDField2;
+	private JTextField BookIDField2;
+	private JTextField BranchField;
+	private JTextField ShelfField;
+	private JComboBox Search_comboBox2;
+	private JRadioButton Rented;
+	private static JTable table2;
+	
+	////functions 
+	static void pane1load()
 	{
 		try 
 		{
@@ -60,14 +67,14 @@ public class MenuWindow extends JFrame {
 		sqlException.printStackTrace();
 		}
 	}
-	static void outputBooksToScreenPanel2()
+	static void Pane2Load()
 	{
 		try 
 		{
-		String query = "select * from BooksCopy";
+		String query = "SELECT * FROM BooksCopy";
 		PreparedStatement pst = connection.prepareStatement(query);
 		ResultSet rs = pst.executeQuery();
-		bookCopyTable.setModel(DbUtils.resultSetToTableModel(rs));
+		table2.setModel(DbUtils.resultSetToTableModel(rs));
 		pst.close();
 		rs.close();
 		}
@@ -76,6 +83,25 @@ public class MenuWindow extends JFrame {
 		sqlException.printStackTrace();
 		}
 	}
+	public void fillComboBox() {
+	try { 
+		String query = "select * from Book";
+		PreparedStatement pst = connection.prepareStatement(query);
+		ResultSet rs = pst.executeQuery();
+	 
+		while(rs.next())
+		{ 
+			Search_comboBox2.addItem(rs.getString("Name"));
+		}
+		pst.close();
+		rs.close();
+	}
+	catch (Exception e) 
+	 { 
+		 e.printStackTrace(); 
+	 } 
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -85,8 +111,8 @@ public class MenuWindow extends JFrame {
 				try {
 					MenuWindow frame = new MenuWindow();
 					frame.setVisible(true);
-					outputBooksToScreen();
-					outputBooksToScreenPanel2();
+					pane1load();
+					Pane2Load();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -97,19 +123,8 @@ public class MenuWindow extends JFrame {
 	
 	static Connection connection=null;
 	
-
-	/*
-	 * public void fillComboBox() { try { String query = "select * from Book";
-	 * PreparedStatement pst = connection.prepareStatement(query); ResultSet rs =
-	 * pst.executeQuery();
-	 * 
-	 * while(rs.next()) { comboBox.addItem(rs.getString("Name")); }
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } }
-	 */
-	/**
-	 * Create the frame.
-	 */
+	
+	
 	public MenuWindow() {
 		sqliteConnection singelton= sqliteConnection.getInstance();
 		connection  = singelton.dbConnector();
@@ -208,7 +223,7 @@ public class MenuWindow extends JFrame {
 	    		pst.execute();
 	    		
 	    		JOptionPane.showMessageDialog(null, "Data Saved");
-	    		outputBooksToScreen();
+	    		pane1load();
 	    		pst.close();
 	    		}
 	    		catch (Exception e) 
@@ -331,7 +346,7 @@ public class MenuWindow extends JFrame {
 	    		pst.execute();
 	    		
 	    		JOptionPane.showMessageDialog(null, "Data Saved");
-	    		outputBooksToScreen();
+	    		pane1load();
 	    		pst.close();
 	    		}
 	    		catch (Exception e1) 
@@ -365,7 +380,7 @@ public class MenuWindow extends JFrame {
 	    				e.printStackTrace();
 	    			}
 	    		}
-	    		outputBooksToScreen();
+	    		pane1load();
 	    	}
 	    });
 	    DeleteButton.setBounds(746, 395, 115, 29);
@@ -407,19 +422,205 @@ public class MenuWindow extends JFrame {
 	    	}
 	    });
 	    txtSearch.setColumns(10);
+	    ///////////////////////////////////////////////////////////////////////////////////////////////////
 	    
-	    JPanel panel_BooksCopy = new JPanel();
 	    
-	    tabbedPane.addTab("Books Copy", null, panel_BooksCopy, null);
 	    
-	    panel_BooksCopy.setLayout(null);
 	    
-	    JScrollPane scrollPane_1 = new JScrollPane();
-	    scrollPane_1.setBounds(0, 0, 717, 377);
-	    panel_BooksCopy.add(scrollPane_1);
 	    
-	    bookCopyTable = new JTable();
-	    scrollPane_1.setViewportView(bookCopyTable);
+	    
+	    
+	    ButtonGroup bg1 = new ButtonGroup( );
+	  		
+	  		Panel panel2 = new Panel();
+	  		tabbedPane.addTab("Book copy", null, panel2, null);
+	  		panel2.setLayout(null);
+	  		
+	  		JButton AddButton = new JButton("");
+	  		AddButton.setIcon(new ImageIcon(img_Plus));
+	  		AddButton.setBounds(958, 254, 39, 29);
+	  		AddButton.addActionListener(new ActionListener() {
+	  			public void actionPerformed(ActionEvent arg0) {
+	  				try 
+	  				{
+	  				BooksCopyService BCS = new BooksCopyService();
+	  				int numCopy=BCS.numcopycheck(Integer.parseInt(BookIDField2.getText()));
+	  			    Boolean rented = ((Rented.isSelected()==true)? true:false);
+	  				String query = "insert into BooksCopy (BookID,NumCopy,Shelf,Branch,IsRented) values (?,?,?,?,?)";
+	  				
+	  				PreparedStatement pst = connection.prepareStatement(query);
+	  				int i =1;
+	  				pst.setInt(i++, Integer.parseInt(BookIDField2.getText()));
+	  				pst.setInt(i++, numCopy);
+	  				pst.setString(i++, ShelfField.getText());
+	  				pst.setString(i++, BranchField.getText());
+	  				pst.setString(i++, rented.toString());
+	  				pst.execute();
+	  				
+	  				JOptionPane.showMessageDialog(null, "Data Saved");
+	  				Pane2Load();
+	  				
+	  				pst.close();
+	  				
+	  				}
+	  				catch (Exception e) 
+	  				{
+	  				e.printStackTrace();
+	  				}
+	  			}
+	  		});
+	  		panel2.add(AddButton);
+	  		
+	  		JLabel lblBookID2 = new JLabel("BookID");
+	  		lblBookID2.setBounds(806, 103, 69, 20);
+	  		lblBookID2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	  		panel2.add(lblBookID2);
+	  		
+	  		BookIDField2 = new JTextField();
+	  		BookIDField2.setBounds(958, 99, 146, 26);
+	  		BookIDField2.setEditable(false);
+	  		BookIDField2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	  		BookIDField2.setColumns(10);
+	  		panel2.add(BookIDField2);
+	  		
+	  		JLabel lblIsRented = new JLabel("IsRented");
+	  		lblIsRented.setBounds(806, 135, 137, 20);
+	  		lblIsRented.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	  		panel2.add(lblIsRented);
+	  		
+	  		JLabel lblBranch = new JLabel("Branch");
+	  		lblBranch.setBounds(806, 171, 69, 20);
+	  		lblBranch.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	  		panel2.add(lblBranch);
+	  		
+	  		BranchField = new JTextField();
+	  		BranchField.setBounds(958, 168, 146, 26);
+	  		BranchField.setColumns(10);
+	  		panel2.add(BranchField);
+	  		
+	  		ShelfField = new JTextField();
+	  		ShelfField.setBounds(958, 206, 146, 26);
+	  		ShelfField.setColumns(10);
+	  		panel2.add(ShelfField);
+	  		
+	  		JLabel lblShelf = new JLabel("Shelf");
+	  		lblShelf.setBounds(806, 209, 69, 20);
+	  		lblShelf.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	  		panel2.add(lblShelf);
+	  		
+	  		JButton RemoveButton = new JButton("");
+	  		RemoveButton.setIcon(new ImageIcon(img_Minus));
+	  		RemoveButton.setBounds(904, 254, 39, 29);
+	  		RemoveButton.addActionListener(new ActionListener() {
+	  			public void actionPerformed(ActionEvent arg0) {
+	  				int action = JOptionPane.showConfirmDialog(null, "do you Really Want To Delete?","Delete",JOptionPane.YES_NO_OPTION);
+	  				if(action==0)
+	  				{
+	  					try 
+	  					{
+	  						String query = "Delete from BooksCopy where BooksCopyID=?";
+	  						PreparedStatement pst = connection.prepareStatement(query);
+	  						pst.setInt(1, Integer.parseInt(BookCopyIDField2.getText()));
+	  						pst.execute();
+	  				
+	  						JOptionPane.showMessageDialog(null, "Data Deleted");
+	  				
+	  						pst.close();
+	  						
+	  					}
+	  					catch (Exception e) 
+	  					{
+	  						e.printStackTrace();
+	  					}
+	  				}
+	  				Pane2Load();
+	  			}
+	  		});
+	  		panel2.add(RemoveButton);
+	  		
+	  		Search_comboBox2 = new JComboBox();
+	  		Search_comboBox2.setBounds(771, 16, 141, 26);
+	  		Search_comboBox2.addActionListener(new ActionListener() {
+	  			public void actionPerformed(ActionEvent arg0) {
+	  				try 
+	      			{
+	      				String query = "select * from Book where name=?";
+	      				PreparedStatement pst = connection.prepareStatement(query);
+	      				pst.setString(1, (String)Search_comboBox2.getSelectedItem());
+	      				ResultSet rs = pst.executeQuery();
+	      				BookIDField2.setText(rs.getString("BookID"));
+	      				pst.execute();	
+	      				pst.close();
+	      			}
+	      			catch (Exception e) 
+	      			{
+	      				e.printStackTrace();
+	      			}
+	  			}
+	  		});
+	  		panel2.add(Search_comboBox2);
+	  		
+	  		
+	  		Rented = new JRadioButton("Yes");
+	  		Rented.setBounds(968, 132, 65, 29);
+	  		Rented.setSelected(true);
+	  		panel2.add(Rented);
+	  		
+	  		JRadioButton Notrented = new JRadioButton("No");
+	  		Notrented.setBounds(1040, 132, 62, 29);
+	  		panel2.add(Notrented);
+	  		bg1.add(Rented);
+	  		bg1.add(Notrented);
+	  		
+	  		JLabel lblBookCopyID = new JLabel("BookCopyID");
+	  		lblBookCopyID.setBounds(806, 65, 121, 20);
+	  		lblBookCopyID.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	  		panel2.add(lblBookCopyID);
+	  		
+	  		BookCopyIDField2 = new JTextField();
+	  		BookCopyIDField2.setBounds(958, 61, 146, 26);
+	  		BookCopyIDField2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	  		BookCopyIDField2.setEditable(false);
+	  		BookCopyIDField2.setColumns(10);
+	  		panel2.add(BookCopyIDField2);
+	  		
+	  		JScrollPane BookCopy = new JScrollPane();
+	  		BookCopy.setBounds(0, 0, 686, 318);
+	  		panel2.add(BookCopy);
+	  		
+	  		table2 = new JTable();
+	  		table2.addMouseListener(new MouseAdapter() {
+	  			@Override
+	  			public void mouseClicked(MouseEvent arg0) {
+	  				try 
+	      			{
+	  				int row = table2.getSelectedRow();
+					String BookID_=(table2.getModel().getValueAt(row, 0)).toString();
+						
+					String query = "select * from BooksCopy where BooksCopyID =?";
+					PreparedStatement pst = connection.prepareStatement(query);
+					pst.setString(1, BookID_);
+					ResultSet rs = pst.executeQuery();
+					while(rs.next())
+					{
+						BookCopyIDField2.setText(rs.getString("BooksCopyID"));
+						BookIDField.setText(rs.getString("BookID"));
+						ShelfField.setText(rs.getString("Shelf"));
+						BranchField.setText(rs.getString("Branch"));
+					
+					}
+					pst.close();
+					rs.close();
+					}
+					catch (Exception e1) 
+					{
+					e1.printStackTrace();
+					}
+	  			}
+	  		});
+	  		BookCopy.setViewportView(table2);
+	  		
+	  	    fillComboBox();
 		
 	}
 }

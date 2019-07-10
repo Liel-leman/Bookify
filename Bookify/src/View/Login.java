@@ -105,7 +105,7 @@ public class Login {
 						{
 						MenuWindow menuinfo = new MenuWindow();
 						menuinfo.setVisible(true);
-						MenuWindow.outputBooksToScreen();
+						MenuWindow.pane1load();
 						}
 						else {
 							MenuWindowSubsc menuinfo = new MenuWindowSubsc();

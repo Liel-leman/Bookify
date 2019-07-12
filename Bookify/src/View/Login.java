@@ -6,6 +6,7 @@ import Model.Book;
 import Model.BookService;
 import Model.PanelService;
 import Model.Person;
+import Model.Subscriber;
 import Model.sqliteConnection;
 
 import java.sql.*;
@@ -61,7 +62,7 @@ public class Login {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("UserName");
+		JLabel lblNewLabel = new JLabel("Username");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setBounds(330, 127, 122, 43);
 		frame.getContentPane().add(lblNewLabel);
@@ -113,7 +114,7 @@ public class Login {
 						new Lib_Menu().setVisible(true);
 						}
 						else {
-						new Subsc_Menu(ID).setVisible(true);
+						new Subsc_Menu(new Subscriber(ID)).setVisible(true);
 						
 							
 					}

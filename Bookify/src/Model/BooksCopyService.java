@@ -47,6 +47,32 @@ public class BooksCopyService extends BooksCopy{
         return BooksCopyList;
     }
     
+    
+    public	 List<BooksCopy> getAllBooksCopysBypersonID(int ID){
+        List<BooksCopy> BooksCopyList = new ArrayList<>();
+        Connection connection = Connect();
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM BooksCopy join Borrow using(BooksCopyID) where RentedBy = " + ID);
+
+            while ( resultSet.next() ) {
+                BooksCopy booksCopy = BooksCopyMaker(resultSet);
+                BooksCopyList.add(booksCopy);
+            }
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        } finally {
+            Disconnect(connection, statement, null, resultSet);
+        }
+        return BooksCopyList;
+    }
+    
+    
+    
     public int numcopycheck(int bookid)
     {
     	 List<BooksCopy> BooksCopyList = new ArrayList<>();
@@ -82,4 +108,5 @@ public class BooksCopyService extends BooksCopy{
              Disconnect(connection, statement, null, resultSet);
          }
     }
+    
 }

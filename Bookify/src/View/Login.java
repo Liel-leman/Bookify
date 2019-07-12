@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import Model.Book;
 import Model.BookService;
+import Model.PanelService;
+import Model.Person;
 import Model.sqliteConnection;
 
 import java.sql.*;
@@ -29,6 +31,7 @@ public class Login {
 			public void run() {
 					Login window = new Login();
 					window.frame.setVisible(true);
+					
 			}
 		});
 	}
@@ -55,7 +58,7 @@ public class Login {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 697, 443);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("UserName");
@@ -82,6 +85,7 @@ public class Login {
 			public void actionPerformed(ActionEvent arg0) {
 				{
 				try {
+					
 					String query = "select * from Person where username=? and password=? and isLibrarian=?";
 					PreparedStatement pst = connection.prepareStatement(query);
 					pst.setString(1,username.getText() );//index 1
@@ -93,9 +97,12 @@ public class Login {
 					else {pst.setString(3,"False");}
 					ResultSet rs = pst.executeQuery();
 					int count  = 0;
+					int ID=0;
 					while(rs.next())
 					{
 						count++;//counting matches
+						ID = rs.getInt("ID");
+						
 					}
 					if(count ==1)
 					{
@@ -103,14 +110,13 @@ public class Login {
 						frame.dispose();
 						if(rdbtnLibrarian.isSelected())
 						{
-						MenuWindow menuinfo = new MenuWindow();
-						menuinfo.setVisible(true);
-						MenuWindow.pane1load();
+						new Lib_Menu().setVisible(true);
 						}
 						else {
-							MenuWindowSubsc menuinfo = new MenuWindowSubsc();
-							menuinfo.setVisible(true);
-						}
+						new Subsc_Menu(ID).setVisible(true);
+						
+							
+					}
 					}
 					else if(count>1)
 					{
@@ -120,8 +126,10 @@ public class Login {
 					{
 						JOptionPane.showMessageDialog(null, "incorrect");
 					}
-					rs.close();//close Connection to DB
-					pst.close();//close connection to DB
+					
+
+					pst.close();
+					rs.close();
 				}catch(Exception e)
 				{
 				JOptionPane.showMessageDialog(null, e);

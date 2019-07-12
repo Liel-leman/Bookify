@@ -26,7 +26,7 @@ public class BooksCopy extends DBConnector{
 	
 	public BooksCopy(int BooksCopyID, int bookID, int numCopy, String shelf, String branch, Boolean isRented) {
 		super();
-		BooksCopyID = BooksCopyID;
+		this.BooksCopyID = BooksCopyID;
 		BookID = bookID;
 		NumCopy = numCopy;
 		Shelf = shelf;
@@ -43,7 +43,7 @@ public class BooksCopy extends DBConnector{
 		return BooksCopyID;
 	}
 	public void setBooksCopyID(int BooksCopyID) {
-		BooksCopyID = BooksCopyID;
+		this.BooksCopyID = BooksCopyID;
 	}
 	public int getBookID() {
 		return BookID;

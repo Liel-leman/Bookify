@@ -5,5 +5,9 @@
 	<classpathentry kind="src" path="img"/>
 	<classpathentry kind="lib" path="Resourxes/sqlite-jdbc-3.27.2.1.jar"/>
 	<classpathentry kind="lib" path="Resourxes/rs2xml.jar"/>
+	<classpathentry kind="lib" path="Resourxes/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="Resourxes/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="Resourxes/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="Resourxes/junit-4.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import Model.Book;
 import Model.BookService;
+import Model.LoginModel;
 import Model.PanelService;
 import Model.Person;
 import Model.Subscriber;
@@ -13,17 +14,29 @@ import java.sql.*;
 import java.util.List;
 
 import javax.swing.*;
+
+import Controller.LoginController;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Button;
-public class Login {
-	JRadioButton rdbtnLibrarian;
-	JRadioButton rdbtnSubscriber;
-	private JFrame frame;
 
+
+
+
+
+public class Login {
+	
+	//OBJ
+	public JRadioButton rdbtnLibrarian;
+	public JRadioButton rdbtnSubscriber;
+	public JFrame frame;
+	public JTextField usernameField;
+	public JPasswordField passwordField;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -35,28 +48,31 @@ public class Login {
 					
 			}
 		});
-	}
+	}	
+	
+
+	//Imge's
 	Image img_lib = new ImageIcon(this.getClass().getResource("/libraryimg.PNG")).getImage();
 	Image img_login = new ImageIcon(this.getClass().getResource("/secrecy-icon.png")).getImage();
 	Image img_radioSubsc = new ImageIcon(this.getClass().getResource("/Subscriber.png")).getImage();
 	Image img_radiolibrarian = new ImageIcon(this.getClass().getResource("/Librarian.png")).getImage();
-	
-	Connection connection = null;
-	private JTextField username;
-	private JPasswordField passwordField;
+
 	/**
 	 * Create the application.
 	 */
+	
 	public Login() {
 		initialize();
-		sqliteConnection singelton= sqliteConnection.getInstance();
-		connection  = singelton.dbConnector();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
+	
 	private void initialize() {
+		
+		LoginController controller  = new LoginController(this);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 697, 443);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,75 +88,20 @@ public class Login {
 		lblNewLabel_1.setBounds(330, 201, 109, 50);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		username = new JTextField();
-		username.setBounds(448, 127, 216, 43);
-		frame.getContentPane().add(username);
-		username.setColumns(10);
+		usernameField = new JTextField();
+		usernameField.setBounds(448, 127, 216, 43);
+		frame.getContentPane().add(usernameField);
+		usernameField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Login");
-		btnNewButton.setIcon(new ImageIcon(img_login));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 17));
-		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				{
-				try {
-					
-					String query = "select * from Person where username=? and password=? and isLibrarian=?";
-					PreparedStatement pst = connection.prepareStatement(query);
-					pst.setString(1,username.getText() );//index 1
-					pst.setString(2,passwordField.getText());//index 2
-					if(rdbtnLibrarian.isSelected())
-					{
-						pst.setString(3,"True");
-					}
-					else {pst.setString(3,"False");}
-					ResultSet rs = pst.executeQuery();
-					int count  = 0;
-					int ID=0;
-					while(rs.next())
-					{
-						count++;//counting matches
-						ID = rs.getInt("ID");
-						
-					}
-					if(count ==1)
-					{
-						JOptionPane.showMessageDialog(null, "userName & pass is Correct");
-						frame.dispose();
-						if(rdbtnLibrarian.isSelected())
-						{
-						new Lib_Menu().setVisible(true);
-						}
-						else {
-						new Subsc_Menu(new Subscriber(ID)).setVisible(true);
-						
-							
-					}
-					}
-					else if(count>1)
-					{
-						JOptionPane.showMessageDialog(null, "duplicate usr& pass");
-					}
-					else 
-					{
-						JOptionPane.showMessageDialog(null, "incorrect");
-					}
-					
-
-					pst.close();
-					rs.close();
-				}catch(Exception e)
-				{
-				JOptionPane.showMessageDialog(null, e);
-				}
-			}
-			}
-		});
+		JButton LoginButton = new JButton("Login");
+		LoginButton.setIcon(new ImageIcon(img_login));
+		LoginButton.setFont(new Font("Tahoma", Font.BOLD, 17));
+		LoginButton.setForeground(Color.BLACK);
+		LoginButton.setBackground(Color.WHITE);
+		LoginButton.addActionListener(controller);
 		
-		btnNewButton.setBounds(448, 266, 216, 43);
-		frame.getContentPane().add(btnNewButton);
+		LoginButton.setBounds(448, 266, 216, 43);
+		frame.getContentPane().add(LoginButton);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(448, 199, 216, 40);

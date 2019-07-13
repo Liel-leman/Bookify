@@ -75,7 +75,8 @@ public class BooksCopyService extends BooksCopy{
     
     public int numcopycheck(int bookid)
     {
-    	 List<BooksCopy> BooksCopyList = new ArrayList<>();
+    	System.out.println(bookid);
+    	List<BooksCopy> BooksCopyList = new ArrayList<>();
     	 BooksCopyList=getAllBooksCopys();
     	 int count=1;
     	 for (BooksCopy book : BooksCopyList){

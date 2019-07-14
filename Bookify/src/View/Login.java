@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 
 import Model.Book;
 import Model.BookService;
-import Model.LoginModel;
 import Model.PanelService;
 import Model.Person;
 import Model.Subscriber;
@@ -23,20 +22,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Button;
-
-
-
-
-
 public class Login {
-	
-	//OBJ
 	public JRadioButton rdbtnLibrarian;
-	public JRadioButton rdbtnSubscriber;
+	JRadioButton rdbtnSubscriber;
 	public JFrame frame;
-	public JTextField usernameField;
-	public JPasswordField passwordField;
 	
+	
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -48,31 +41,27 @@ public class Login {
 					
 			}
 		});
-	}	
-	
-
-	//Imge's
+	}
 	Image img_lib = new ImageIcon(this.getClass().getResource("/libraryimg.PNG")).getImage();
 	Image img_login = new ImageIcon(this.getClass().getResource("/secrecy-icon.png")).getImage();
 	Image img_radioSubsc = new ImageIcon(this.getClass().getResource("/Subscriber.png")).getImage();
 	Image img_radiolibrarian = new ImageIcon(this.getClass().getResource("/Librarian.png")).getImage();
-
+	
+	public JTextField usernameField;
+	public JPasswordField passwordField;
 	/**
 	 * Create the application.
 	 */
-	
 	public Login() {
 		initialize();
+
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	
-	
 	private void initialize() {
-		
-		LoginController controller  = new LoginController(this);
+		LoginController controller = new LoginController(this);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 697, 443);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -93,15 +82,15 @@ public class Login {
 		frame.getContentPane().add(usernameField);
 		usernameField.setColumns(10);
 		
-		JButton LoginButton = new JButton("Login");
-		LoginButton.setIcon(new ImageIcon(img_login));
-		LoginButton.setFont(new Font("Tahoma", Font.BOLD, 17));
-		LoginButton.setForeground(Color.BLACK);
-		LoginButton.setBackground(Color.WHITE);
-		LoginButton.addActionListener(controller);
+		JButton btnNewButton = new JButton("Login");
+		btnNewButton.setIcon(new ImageIcon(img_login));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 17));
+		btnNewButton.setForeground(Color.BLACK);
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.addActionListener(controller);
 		
-		LoginButton.setBounds(448, 266, 216, 43);
-		frame.getContentPane().add(LoginButton);
+		btnNewButton.setBounds(448, 266, 216, 43);
+		frame.getContentPane().add(btnNewButton);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(448, 199, 216, 40);

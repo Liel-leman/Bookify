@@ -36,12 +36,29 @@ public class Login {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				try {
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 					Login window = new Login();
+					
 					window.frame.setVisible(true);
 					
 			}
 		});
 	}
+	//images
 	Image img_lib = new ImageIcon(this.getClass().getResource("/libraryimg.PNG")).getImage();
 	Image img_login = new ImageIcon(this.getClass().getResource("/secrecy-icon.png")).getImage();
 	Image img_radioSubsc = new ImageIcon(this.getClass().getResource("/Subscriber.png")).getImage();
@@ -53,6 +70,7 @@ public class Login {
 	 * Create the application.
 	 */
 	public Login() {
+		
 		initialize();
 
 	}
@@ -61,9 +79,10 @@ public class Login {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		LoginController controller = new LoginController(this);
-		frame = new JFrame();
-		frame.setBounds(100, 100, 697, 443);
+		frame = new JFrame("Bookify");
+		frame.setBounds(100, 100, 697, 428);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		

@@ -24,7 +24,6 @@ public class sqliteConnection {
 			Class.forName("org.sqlite.JDBC");
 			String ConString = "jdbc:sqlite:"+System.getProperty("user.dir")+"\\Bookify.sqlite";//directory of the sqlite.db
 			Connection conn = DriverManager.getConnection(ConString);
-			System.out.println("connection Succesfull");
 			return conn;
 		}
 		catch(Exception e)

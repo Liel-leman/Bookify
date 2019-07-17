@@ -1,2 +1,3 @@
 # Bookify
-library management system
+Computer Science Project 
+java -eclipse -swing - sqlite

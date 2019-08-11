@@ -1,5 +1,6 @@
-# Bookify
-Computer Science Project 
+## Bookify
+
+
 
 
 java -eclipse -swing - sqlite

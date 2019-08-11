@@ -40,10 +40,10 @@ You need also mark the connection youwant to establish (subscriber or librarian 
 
 ### Subscriber Interface
 you can choose between 
--*Borrowing* - new borrow 
--*My Borrowings* - all borrows that i got
--*Shop* - Internet shop that calculates how match money you spent
--*My info* - showing info about your self
+- *Borrowing* - new borrow 
+- *My Borrowings* - all borrows that i got
+- *Shop* - Internet shop that calculates how match money you spent
+- *My info* - showing info about your self
 
 in the borrowing section you need to choose by the arrows what books you want to borrow
 ![Bookify Borrowing](https://live.staticflickr.com/65535/48514425771_60b8167162_z.jpg)

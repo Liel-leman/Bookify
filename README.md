@@ -28,9 +28,12 @@ I made this App with Eclipse combined with UI of Swing. Extra libraries:
 
 ## App guide
 ### Login
-In the login panel you can login eather as Librarian : eli:123456 | eather as subscriber ilan:123456
+
+In the login panel you can login eather as Librarian : eli:123456 / eather as subscriber ilan:123456
+
 ![Bookify Login](https://live.staticflickr.com/65535/48514426106_7605bb29a8_z.jpg)
-In `New Game Menu` you can choose how many players will play, select name and badge color.
+
+In -New Game Menu- you can choose how many players will play, select name and badge color.
 You need also mark the connection youwant to establish (subscriber or librarian user interface)
 
 
@@ -50,13 +53,17 @@ after you choose you need to choose the date of the boorrowing
 
 Then you just click borrow to finish
 
+
 now to check what books in your borrow list you need to click "MyBorrowings" 
+
 ![Bookify MyBorrowings](https://live.staticflickr.com/65535/48514607742_4c742ff2e2_z.jpg)
 
 if You Want to Buy books permanently you go to "Shop"
+
 ![Bookify Shop](https://live.staticflickr.com/65535/48514425486_bcd4fb3c0d_z.jpg)
 
 and now if you want to check your info and books borrowed go to "Myinfo"
+
 ![Bookify Myinfo](https://live.staticflickr.com/65535/48514607927_79c9f5772b_z.jpg)
 
 ---

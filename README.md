@@ -29,4 +29,4 @@ I made this App with Eclipse combined with UI of Swing. Extra libraries:
 ## App guide
 ### Login
 In the login panel you can login eather as Librarian : eli:123456 | eather as subscriber ilan:123456
-![Bookify Login](<a data-flickr-embed="true"  href="https://www.flickr.com/photos/183351930@N04/48514426106/in/dateposted-public/" title="Login"><img src="https://live.staticflickr.com/65535/48514426106_7605bb29a8_z.jpg" width="640" height="392" alt="Login"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>)
+![Bookify Login](<a data-flickr-embed="true"  href="https://www.flickr.com/photos/183351930@N04/48514426106/in/dateposted-public/" title="Login"><img src="https://live.staticflickr.com/65535/48514426106_7605bb29a8_z.jpg")

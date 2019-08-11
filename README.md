@@ -3,7 +3,7 @@
 - You can install Bookify By Downloading the project files and run from Eclipse IDE 
 From the "Main Class"
 - You Can Download Only the Jar File and run from the CMD by the Command :
-	`java -jar Minecraft.jar`
+	`java -jar BookifyRun.jar`
 ## About The Project
 I made this App with Eclipse combined with UI of Swing. Extra libraries: 
 - *sqlite-jdbc*
@@ -46,9 +46,11 @@ you can choose between
 - *My info* - showing info about your self
 
 in the borrowing section you need to choose by the arrows what books you want to borrow
+
 ![Bookify Borrowing](https://live.staticflickr.com/65535/48514425771_60b8167162_z.jpg)
 
 after you choose you need to choose the date of the boorrowing
+
 ![Bookify Borrowing](https://live.staticflickr.com/65535/48514425871_05bddb20b1_z.jpg)
 
 Then you just click borrow to finish
@@ -69,7 +71,36 @@ and now if you want to check your info and books borrowed go to "Myinfo"
 ---
 
 ### Librarian Interface(admin)
-now you enter the management systemm of the library:
+now you enter the management systemm of the library , all panels have smart search included :
 
-You can manage type of books by Editing/Deleting/Inserting Books
-![Bookify Borrowing](https://live.staticflickr.com/65535/48514607522_83c9a67a1e_z.jpg)
+You can manage type of books by Editing/Deleting/Inserting Books(book Catalog)
+
+![Bookify Catalog](https://live.staticflickr.com/65535/48514607522_83c9a67a1e_z.jpg)
+
+On the seconed panel you can manage the bookcopys (real books that exist on your library)
+
+![Bookify BookCopy](https://live.staticflickr.com/65535/48514426306_a038bdddb8_z.jpg)
+
+Third panel is the borrow panel when you can return books by the librarian
+
+![Bookify Lib_borrow](https://live.staticflickr.com/65535/48514426396_034269bf11_z.jpg)
+
+One more fiture on all the screens you can get to the MenuBar where you can find :
+- *Add New Subscriber* 
+- *Logout*
+- *Exit*
+
+
+![Bookify MenuBar](https://live.staticflickr.com/65535/48514608477_e100728124_m.jpg)
+
+---
+
+### Video
+
+https://www.youtube.com/embed/ckKLSyxRcqA
+
+---
+
+## My Contacts
+- [Facebook - Eli Leman](https://www.facebook.com/eli.leman)
+- [LinkedIn - Eli Leman](https://www.linkedin.com/in/liel-leman/)

@@ -1,7 +1,7 @@
 # Bookify - Library Management System in Java Swing & SQLite
 ## Installation
 - You can install Bookify By Cloning the project files To EclipseIDE and Run From the "Main Class"
-- You Can Download Only the Jar File on this [Link](https://drive.google.com/drive/folders/1crakX7lpDlvyLGu4nncDZ1_arEl0fMIK?usp=sharing) and run from the CMD by the Command :
+- You Can Download winrar File on this [Link](https://github.com/eli1809/Bookify/releases) and run from the CMD this Command :
 	`java -jar BookifyRun.jar` 
 ## About The Project
 I made this App with Eclipse combined with UI of Swing. Extra libraries: 
